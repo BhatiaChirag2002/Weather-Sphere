@@ -5,6 +5,7 @@ import 'package:weather_sphere/controller/global_controller.dart';
 import 'package:weather_sphere/utils/app_colors.dart';
 import 'package:weather_sphere/widgets/current_weather_widget.dart';
 import 'package:weather_sphere/widgets/header_widget.dart';
+import 'package:weather_sphere/widgets/hourly_weather_widget.dart';
 import 'package:weather_sphere/widgets/loading_screen.dart';
 
 class HomeView extends StatefulWidget {
@@ -40,6 +41,9 @@ class _HomeViewState extends State<HomeView> {
                          const HeaderWidget(),
                           CurrentWeatherWidget(
                             currentWeatherData: globalController.getWeatherData().getCurrentWeather(),
+                          ),
+                          HourlyWeatherWidget(
+                            hourlyWeatherData: globalController.getWeatherData().getHourlyWeather(),
                           )
                         ],
                       ),

@@ -13,6 +13,7 @@ class GlobalController extends GetxController {
   final RxBool _isLoading = true.obs;
   final RxDouble _latitude = 0.0.obs;
   final RxDouble _longitude = 0.0.obs;
+  final RxInt _currentIndex = 0.obs;
 
   RxBool checkLoading() => _isLoading;
 
@@ -80,4 +81,9 @@ class GlobalController extends GetxController {
       updateClock();
     });
   }
+
+  RxInt getIndex() {
+    return _currentIndex;
+  }
+
 }
