@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:weather_sphere/controller/global_controller.dart';
 import 'package:weather_sphere/utils/app_colors.dart';
+import 'package:weather_sphere/widgets/current_weather_widget.dart';
 import 'package:weather_sphere/widgets/header_widget.dart';
+import 'package:weather_sphere/widgets/loading_screen.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -28,14 +29,19 @@ class _HomeViewState extends State<HomeView> {
         child: Scaffold(
             backgroundColor: Colors.transparent,
             body: Obx(() => globalController.checkLoading().isTrue
-                ? SpinKitFadingCube(color: AppColors.textColor)
+                ? const LoadingScreen()
                 : SafeArea(
                     child: Padding(
                     padding: EdgeInsets.only(
                         top: 5.h, left: 5.w, right: 5.w, bottom: 5.w),
-                    child: const SingleChildScrollView(
+                    child: SingleChildScrollView(
                       child: Column(
-                        children: [HeaderWidget()],
+                        children: [
+                         const HeaderWidget(),
+                          CurrentWeatherWidget(
+                            currentWeatherData: globalController.getWeatherData().getCurrentWeather(),
+                          )
+                        ],
                       ),
                     ),
                   )))));

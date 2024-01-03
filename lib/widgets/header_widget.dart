@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:weather_sphere/controller/global_controller.dart';
-import 'package:weather_sphere/controller/header_controller.dart';
 import 'package:weather_sphere/utils/app_textstyle.dart';
 
 class HeaderWidget extends StatefulWidget {
@@ -14,12 +13,10 @@ class HeaderWidget extends StatefulWidget {
 
 class _HeaderWidgetState extends State<HeaderWidget> {
   final GlobalController globalController = Get.find();
-  final HeaderController headerController = Get.put(HeaderController());
 
   @override
   void initState() {
-    headerController.timeDate();
-    headerController.getAddress(
+    globalController.getAddress(
       globalController.findLatitude().value,
       globalController.findLongitude().value,
     );
@@ -36,10 +33,10 @@ class _HeaderWidgetState extends State<HeaderWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                  '${headerController.city.value}, ${headerController.state.value}',
+                  '${globalController.city.value} ${globalController.state.value}',
                   style: AppTextStyle.headerCityStateText(),
                   overflow: TextOverflow.ellipsis),
-              Text(headerController.date.value,
+              Text(globalController.currentTime.value,
                   style: AppTextStyle.headerDateAndTimeText()),
             ],
           )),

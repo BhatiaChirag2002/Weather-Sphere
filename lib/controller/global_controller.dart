@@ -1,9 +1,15 @@
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:weather_sphere/model/weather_data.dart';
+import 'package:weather_sphere/utils/fetch_data.dart';
 
 class GlobalController extends GetxController {
   static GlobalController get instance => Get.find();
-
+  var city = ''.obs;
+  var state = ''.obs;
+  RxString currentTime = DateFormat('EEEE, d MMMM y').format(DateTime.now()).obs;
   final RxBool _isLoading = true.obs;
   final RxDouble _latitude = 0.0.obs;
   final RxDouble _longitude = 0.0.obs;
@@ -14,12 +20,19 @@ class GlobalController extends GetxController {
 
   RxDouble findLongitude() => _longitude;
 
+  final weatherData = WeatherData().obs;
+
+  WeatherData getWeatherData() {
+    return weatherData.value;
+  }
+
   @override
   void onInit() async {
     if (_isLoading.isTrue) {
       findLocation();
     }
     super.onInit();
+    updateClock();
   }
 
   findLocation() async {
@@ -44,11 +57,27 @@ class GlobalController extends GetxController {
     }
 
     return await Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high)
+        desiredAccuracy: LocationAccuracy.high)
         .then((value) {
       _latitude.value = value.latitude;
       _longitude.value = value.longitude;
-      _isLoading.value = false;
+      return FetchWeatherAPI().processData(value.latitude, value.longitude).then((value){
+        weatherData.value = value;
+        _isLoading.value = false;
+      });
+    });
+
+  }
+  void getAddress(lat, lon) async {
+    List<Placemark> placemark = await placemarkFromCoordinates(lat, lon);
+    Placemark place = placemark[0];
+    city.value = place.locality!;
+    state.value = place.administrativeArea!;
+  }
+  void updateClock() {
+    Future.delayed(const Duration(seconds: 1), () {
+      currentTime.value = DateFormat('EEEE, d MMMM y').format(DateTime.now());
+      updateClock();
     });
   }
 }

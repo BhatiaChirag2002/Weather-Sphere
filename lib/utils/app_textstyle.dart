@@ -17,4 +17,40 @@ class AppTextStyle {
         color: AppColors.textColor,
         fontWeight: FontWeight.w600);
   }
+
+  static TextStyle currentWeatherDegree() {
+    return GoogleFonts.robotoCondensed(
+      fontSize: 60.sp,
+      color: AppColors.textColor,
+      fontWeight: FontWeight.w700,
+    );
+  }
+
+  static TextStyle currentWeatherDescription() {
+    return GoogleFonts.chivo(
+        fontSize: 25.sp,
+        color: AppColors.textColor,
+        fontWeight: FontWeight.w500);
+  }
+
+  static TextStyle currentWeatherContainerTitle() {
+    return GoogleFonts.chivo(
+        fontSize: 14.sp,
+        color: AppColors.textColor,
+        fontWeight: FontWeight.w500);
+  }
+
+  static TextStyle currentWeatherContainerAqi() {
+    return GoogleFonts.chivo(
+        fontSize: 14.sp,
+        color: AppColors.textColor,
+        fontWeight: FontWeight.w500);
+  }
+
+  static TextStyle currentWeatherContainerResult() {
+    return GoogleFonts.chivo(
+        fontSize: 13.sp,
+        color: AppColors.textColor,
+        fontWeight: FontWeight.w400);
+  }
 }
