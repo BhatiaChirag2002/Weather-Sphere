@@ -9,13 +9,15 @@ class CurrentWeatherWidget extends StatelessWidget {
   final int? sunrise;
   final int? sunset;
   final CurrentWeatherData currentWeatherData;
-  const CurrentWeatherWidget({super.key, required this.currentWeatherData, this.sunrise, this.sunset});
+  const CurrentWeatherWidget(
+      {super.key, required this.currentWeatherData, this.sunrise, this.sunset});
 
   String getSunriseTime(final sunrise) {
     DateTime time = DateTime.fromMillisecondsSinceEpoch(sunrise * 1000);
     String x = DateFormat('jm').format(time);
     return x;
   }
+
   String getSunsetTime(final sunset) {
     DateTime time = DateTime.fromMillisecondsSinceEpoch(sunset * 1000);
     String x = DateFormat('jm').format(time);
@@ -70,10 +72,12 @@ class CurrentWeatherWidget extends StatelessWidget {
                         CurrentWeatherContainerWidget(
                             image: 'sunrise',
                             title: 'Sunrise',
-                            result: getSunriseTime(currentWeatherData.current.sunrise)
-                        ),
+                            result: getSunriseTime(
+                                currentWeatherData.current.sunrise)),
                         CurrentWeatherContainerWidget(
-                            image: 'cloud', title: 'Clouds', result: '${currentWeatherData.current.clouds}%'),
+                            image: 'cloud',
+                            title: 'Clouds',
+                            result: '${currentWeatherData.current.clouds}%'),
                         CurrentWeatherContainerWidget(
                             image: 'humidity',
                             title: 'Humidity',
@@ -81,7 +85,8 @@ class CurrentWeatherWidget extends StatelessWidget {
                         CurrentWeatherContainerWidget(
                             image: 'feels',
                             title: 'Feels Like',
-                            result: '${currentWeatherData.current.feelsLike!.round()}ºC'),
+                            result:
+                                '${currentWeatherData.current.feelsLike!.round()}ºC'),
                       ],
                     ),
                     Column(
@@ -90,15 +95,23 @@ class CurrentWeatherWidget extends StatelessWidget {
                         CurrentWeatherContainerWidget(
                             image: 'sunset',
                             title: 'Sunset',
-                            result: getSunsetTime(currentWeatherData.current.sunset)),
+                            result: getSunsetTime(
+                                currentWeatherData.current.sunset)),
                         CurrentWeatherContainerWidget(
-                            image: 'wind', title: 'Wind', result: '${currentWeatherData.current.windSpeed!.round()} m/s'),
+                            image: 'wind',
+                            title: 'Wind',
+                            result:
+                                '${currentWeatherData.current.windSpeed!.round()} m/s'),
                         CurrentWeatherContainerWidget(
-                            image: 'uvi', title: 'UV Index', result: '${currentWeatherData.current.uvi!.round()}'),
+                            image: 'uvi',
+                            title: 'UV Index',
+                            result:
+                                '${currentWeatherData.current.uvi!.round()}'),
                         CurrentWeatherContainerWidget(
                             image: 'pressure',
                             title: 'Pressure',
-                            result: '${currentWeatherData.current.pressure!.round()} hPa'),
+                            result:
+                                '${currentWeatherData.current.pressure!.round()} hPa'),
                       ],
                     )
                   ],

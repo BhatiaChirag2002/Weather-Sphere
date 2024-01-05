@@ -9,7 +9,8 @@ class GlobalController extends GetxController {
   static GlobalController get instance => Get.find();
   var city = ''.obs;
   var state = ''.obs;
-  RxString currentTime = DateFormat('EEEE, d MMMM y').format(DateTime.now()).obs;
+  RxString currentTime =
+      DateFormat('EEEE, d MMMM y').format(DateTime.now()).obs;
   final RxBool _isLoading = true.obs;
   final RxDouble _latitude = 0.0.obs;
   final RxDouble _longitude = 0.0.obs;
@@ -58,23 +59,26 @@ class GlobalController extends GetxController {
     }
 
     return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high)
+            desiredAccuracy: LocationAccuracy.high)
         .then((value) {
       _latitude.value = value.latitude;
       _longitude.value = value.longitude;
-      return FetchWeatherAPI().processData(value.latitude, value.longitude).then((value){
+      return FetchWeatherAPI()
+          .processData(value.latitude, value.longitude)
+          .then((value) {
         weatherData.value = value;
         _isLoading.value = false;
       });
     });
-
   }
+
   void getAddress(lat, lon) async {
     List<Placemark> placemark = await placemarkFromCoordinates(lat, lon);
     Placemark place = placemark[0];
     city.value = place.locality!;
     state.value = place.administrativeArea!;
   }
+
   void updateClock() {
     Future.delayed(const Duration(seconds: 1), () {
       currentTime.value = DateFormat('EEEE, d MMMM y').format(DateTime.now());
@@ -85,5 +89,4 @@ class GlobalController extends GetxController {
   RxInt getIndex() {
     return _currentIndex;
   }
-
 }

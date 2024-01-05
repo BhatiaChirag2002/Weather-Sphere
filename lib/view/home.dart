@@ -3,7 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:weather_sphere/controller/global_controller.dart';
 import 'package:weather_sphere/utils/app_colors.dart';
+import 'package:weather_sphere/utils/app_textstyle.dart';
+import 'package:weather_sphere/utils/my_flutter_app_icons.dart';
 import 'package:weather_sphere/widgets/current_weather_widget.dart';
+import 'package:weather_sphere/widgets/daily_weather_widget.dart';
 import 'package:weather_sphere/widgets/header_widget.dart';
 import 'package:weather_sphere/widgets/hourly_weather_widget.dart';
 import 'package:weather_sphere/widgets/loading_screen.dart';
@@ -38,12 +41,41 @@ class _HomeViewState extends State<HomeView> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                         const HeaderWidget(),
+                          const HeaderWidget(),
                           CurrentWeatherWidget(
-                            currentWeatherData: globalController.getWeatherData().getCurrentWeather(),
+                            currentWeatherData: globalController
+                                .getWeatherData()
+                                .getCurrentWeather(),
                           ),
                           HourlyWeatherWidget(
-                            hourlyWeatherData: globalController.getWeatherData().getHourlyWeather(),
+                            hourlyWeatherData: globalController
+                                .getWeatherData()
+                                .getHourlyWeather(),
+                          ),
+                          DailyWeatherWidget(
+                              dailyWeatherData: globalController
+                                  .getWeatherData()
+                                  .getDailyWeather()),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Created by ',
+                                style: AppTextStyle.caveat(),
+                              ),
+                              Icon(
+                                MyFlutterApp.logo,
+                                color: Colors.white,
+                                size: 15.sp,
+                              ),
+                              Text(
+                                ' Chirag Bhatia',
+                                style: AppTextStyle.caveat(),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
                           )
                         ],
                       ),

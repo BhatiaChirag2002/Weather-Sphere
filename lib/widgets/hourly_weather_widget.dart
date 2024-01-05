@@ -24,7 +24,8 @@ class _HourlyWeatherWidgetState extends State<HourlyWeatherWidget> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(vertical: 10.h),
-          child: Text('Today', style: AppTextStyle.headerCityStateText()),
+          child: Text('24-hour forecast',
+              style: AppTextStyle.headerCityStateText()),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
@@ -51,7 +52,9 @@ class _HourlyWeatherWidgetState extends State<HourlyWeatherWidget> {
                             '${widget.hourlyWeatherData.hourly[index].weather![0].icon}',
                         borderColor: cardIndex.value == index
                             ? AppColors.textColor
-                            : AppColors.gradientColor2, description: widget.hourlyWeatherData.hourly[index].weather![0].description!,
+                            : AppColors.gradientColor2,
+                        description: widget.hourlyWeatherData.hourly[index]
+                            .weather![0].description!,
                       ),
                     ));
               },
@@ -69,9 +72,9 @@ class ContainerWidget extends StatefulWidget {
   final int temp;
   final int time;
   final Color borderColor;
- final int index;
- final int cardIndex;
- final String description;
+  final int index;
+  final int cardIndex;
+  final String description;
 
   const ContainerWidget(
       {super.key,
@@ -79,7 +82,10 @@ class ContainerWidget extends StatefulWidget {
       required this.backgroundImage,
       required this.temp,
       required this.weatherImage,
-      required this.borderColor, required this.index, required this.cardIndex, required this.description});
+      required this.borderColor,
+      required this.index,
+      required this.cardIndex,
+      required this.description});
 
   @override
   State<ContainerWidget> createState() => _ContainerWidgetState();
@@ -126,7 +132,6 @@ class _ContainerWidgetState extends State<ContainerWidget> {
             widget.description,
             style: AppTextStyle.headerDateAndTimeText(),
           ),
-
         ],
       ),
     );
