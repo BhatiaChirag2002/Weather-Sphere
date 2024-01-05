@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:weather_sphere/controller/ads_controller.dart';
 import 'package:weather_sphere/controller/global_controller.dart';
 import 'package:weather_sphere/utils/app_colors.dart';
 import 'package:weather_sphere/utils/app_textstyle.dart';
@@ -19,6 +21,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final AdController adController = Get.put(AdController());
   final GlobalController globalController = Get.put(GlobalController());
   @override
   Widget build(BuildContext context) {
@@ -41,6 +44,10 @@ class _HomeViewState extends State<HomeView> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
+                          SizedBox(
+                            height: adController.topBannerAd.value.size.height.toDouble(),
+                            child: AdWidget(ad: adController.topBannerAd.value),
+                          ),
                           const HeaderWidget(),
                           CurrentWeatherWidget(
                             currentWeatherData: globalController
