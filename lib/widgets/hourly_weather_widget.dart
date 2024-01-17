@@ -102,8 +102,8 @@ class _ContainerWidgetState extends State<ContainerWidget> {
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
-      height: 140.h,
-      width: 100.w,
+      height: 150.h,
+      width: 135.w,
       decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(

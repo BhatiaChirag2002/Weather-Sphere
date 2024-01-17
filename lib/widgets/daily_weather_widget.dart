@@ -179,7 +179,7 @@ class _ContainerWidgetDailyState extends State<ContainerWidgetDaily> {
                   ),
                   const Spacer(),
                   Text(
-                    getsunsetTime(widget.sunrise),
+                    getsunsetTime(widget.sunset),
                     style: AppTextStyle.headerDateAndTimeText(),
                   ),
                 ],

@@ -34,7 +34,7 @@ class LoadingScreen extends StatelessWidget {
                       'Weather Sphere',
                       style: AppTextStyle.currentWeatherDescription(),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,7 +56,7 @@ class LoadingScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
